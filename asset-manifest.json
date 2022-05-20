@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/financial_ledger_frontend/static/css/main.ce84692b.css",
+    "main.js": "/financial_ledger_frontend/static/js/main.e73f1463.js",
+    "index.html": "/financial_ledger_frontend/index.html",
+    "main.ce84692b.css.map": "/financial_ledger_frontend/static/css/main.ce84692b.css.map",
+    "main.e73f1463.js.map": "/financial_ledger_frontend/static/js/main.e73f1463.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce84692b.css",
+    "static/js/main.e73f1463.js"
+  ]
+}
