@@ -81,7 +81,6 @@ audio,
 video {
   margin: 0;
   padding: 0;
-  border: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -128,7 +127,7 @@ table {
 
 @tailwind base;
 .bluePrint {
-  @apply flex justify-center items-center font-bold text-lg;
+  @apply flex justify-center items-center font-bold text-lg bg-slate-300;
 }
 @tailwind components;
 @tailwind utilities;

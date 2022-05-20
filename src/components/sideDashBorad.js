@@ -1,25 +1,27 @@
 import { Link } from 'react-router-dom';
-
-const LinkCss = 'w-full my-3 pl-6 text-sm';
+import { routeList } from '../route-info';
 
 export const SideDashBoard = () => {
   return (
-    <div className="w-[200px] bg-slate-200 h-screen flex flex-col justify-start items-start pt-8">
-      <Link className={LinkCss} to="/dashBoard">
-        대시보드
-      </Link>
-      <Link className={LinkCss} to="/spend">
-        수입/지출 내역
-      </Link>
-      <Link className={LinkCss} to="/category">
-        카테고리
-      </Link>
-      <Link className={LinkCss} to="/report/weekly">
-        주간 보고서
-      </Link>
-      <Link className={LinkCss} to="/report/monthly">
-        월간 보고서
-      </Link>
+    <div className="w-[70px] md:w-[220px] pl-1 md:pl-4 md:min-w-[165px] h-auto flex flex-col justify-start items-start pt-12 border border-y-0 boder-l-0">
+      <div className="w-full h-9 md:h-7"></div>
+      {routeList.map((row) => (
+        <Link
+          to={row.herf}
+          key={row.key}
+          className="w-full py-2 md:mt-3 md:pl-4 flex justify-center md:justify-start items-center text-sm"
+        >
+          <i
+            className={`${row.icon} mr-3 text-gray-500 text-2xl mb-2 -z-10`}
+          ></i>
+          <span
+            id={row.key}
+            className="font-bold text-gray-500 hidden md:block pb-2"
+          >
+            {row.name}
+          </span>
+        </Link>
+      ))}
     </div>
   );
 };

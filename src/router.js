@@ -4,6 +4,7 @@ import NotFound from './pages/notFound';
 import Spend from './pages/spend';
 import Category from './pages/category';
 import TimeReport from './pages/timeReport';
+import Test from './pages/test';
 
 const MainRouter = () => {
   return (
@@ -16,6 +17,7 @@ const MainRouter = () => {
           <Route path="/category" element={<Category />}></Route>
           <Route path="/report/weekly" element={<TimeReport />}></Route>
           <Route path="/report/monthly" element={<TimeReport />}></Route>
+          <Route path="/test" element={<Test />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
