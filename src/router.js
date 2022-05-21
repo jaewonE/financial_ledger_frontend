@@ -9,7 +9,7 @@ import Test from './pages/test';
 const MainRouter = () => {
   return (
     <div className=" w-screen h-screen m-0 p-0">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<DashBoard />}></Route>
           <Route path="/dashBoard" element={<DashBoard />}></Route>

@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { VictoryAnimation, VictoryLabel, VictoryPie } from 'victory';
 
-export const SingleRoundChat = ({
-  inputPercent,
-  inputData,
-  state,
-  styleNum,
-}) => {
+export const SingleRoundChat = ({ data }) => {
   const [percent, setPercent] = useState(0);
-  const [data, setData] = useState([
+  const [percentData, setPercentData] = useState([
     { x: 1, y: 0 },
     { x: 2, y: 100 },
   ]);
   useEffect(() => {
-    const getData = (percent) => {
-      setData(inputData);
-    };
-    setPercent(inputPercent);
-    getData(percent);
-  }, [percent, inputData, inputPercent]);
+    setPercent(data.percent);
+    setPercentData([
+      { x: 1, y: percent },
+      { x: 2, y: 100 - percent },
+    ]);
+  }, [data, percent]);
   return (
     <div
-      className={`w-full h-full flex p-4 rounded-lg shadow-xl min-w-[225px] ${styleNum}`}
+      className={`w-full h-full flex p-4 rounded-lg shadow-xl min-w-[225px]`}
+      style={{ backgroundColor: data.bgColor }}
     >
       <div className="w-1/2 h-full flex justify-center items-center text-white">
         <svg
@@ -35,7 +31,7 @@ export const SingleRoundChat = ({
             standalone={false}
             width={400}
             height={400}
-            data={data}
+            data={percentData}
             // colorScale={["#19B3A6", "#EEEEEE" ]}
             innerRadius={120}
             cornerRadius={25}
@@ -74,9 +70,9 @@ export const SingleRoundChat = ({
         </svg>
       </div>
       <div className=" w-1/2 h-full flex flex-col justify-between items-end py-2">
-        <span className="text-white font-bold">{state.category}</span>
-        <span className="text-white font-bold">{state.balance}</span>
-        <span className="text-white font-bold text-sm">{state.createAt}</span>
+        <span className="text-white font-bold">{data.category}</span>
+        <span className="text-white font-bold">{data.balance}</span>
+        <span className="text-white font-bold text-sm">{data.createAt}</span>
       </div>
     </div>
   );
