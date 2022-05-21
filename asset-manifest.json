@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/financial_ledger_frontend/static/css/main.624e6912.css",
-    "main.js": "/financial_ledger_frontend/static/js/main.9e084da8.js",
+    "main.css": "/financial_ledger_frontend/static/css/main.874fd44b.css",
+    "main.js": "/financial_ledger_frontend/static/js/main.d79f574f.js",
     "index.html": "/financial_ledger_frontend/index.html",
-    "main.624e6912.css.map": "/financial_ledger_frontend/static/css/main.624e6912.css.map",
-    "main.9e084da8.js.map": "/financial_ledger_frontend/static/js/main.9e084da8.js.map"
+    "main.874fd44b.css.map": "/financial_ledger_frontend/static/css/main.874fd44b.css.map",
+    "main.d79f574f.js.map": "/financial_ledger_frontend/static/js/main.d79f574f.js.map"
   },
   "entrypoints": [
-    "static/css/main.624e6912.css",
-    "static/js/main.9e084da8.js"
+    "static/css/main.874fd44b.css",
+    "static/js/main.d79f574f.js"
   ]
 }
