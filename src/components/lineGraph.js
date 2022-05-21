@@ -47,6 +47,7 @@ export const LineGraph = ({
         {fill &&
           data.map((props, index) => (
             <VictoryArea
+              key={index}
               style={{
                 data: {
                   fill: colorsProps[index],
@@ -84,7 +85,7 @@ export const LineGraph = ({
         />
       </VictoryChart>
       <div className="flex justify-evenly items-start w-full pb-3">
-        {dataInfoSample.showLineLabel &&
+        {showLineLabel &&
           dataInfoSample.lineLabels.map((name, index) => (
             <span
               key={index}

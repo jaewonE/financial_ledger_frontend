@@ -66,17 +66,15 @@ const Category = () => {
         </div>
       </div>
       <div className="w-full h-12 text-xl font-semibold pl-1 mt-10 mb-3 flex justify-start items-center">
-        <div className="flex h-full">
+        <div className="flex h-full items-center">
           <select
-            className="m-0 px-2 py-0 min-w-0 w-full border rounded-lg shadow-inner bg-transparent hover:border-orange-400 hover:border-2 mr-3 focus:outline-none"
+            className="m-0 px-2 py-0 min-w-0 w-full h-3/4 border rounded-lg shadow-inner bg-transparent hover:border-orange-400 hover:border-2 mr-3 focus:outline-none"
             name="select"
+            key={'select'}
+            defaultValue={focusCategory}
           >
             {categoryList.map((category, index) => (
-              <option
-                key={index}
-                value={category.value}
-                selected={focusCategory === category ? true : false}
-              >
+              <option key={index} value={category.value}>
                 {category.name}
               </option>
             ))}
