@@ -52,17 +52,16 @@ const DashBoard = () => {
   const tableSampleData = useMemo(() => data_tableSample, []);
   return (
     <BaseWrapper>
+      <div className="w-full h-10 text-xl font-semibold my-1 pl-1">
+        최근 일주일간 지출 내역
+      </div>
       <div className="w-full auto flex flex-col lg:flex-row">
         <div className="bg-white w-full h-auto flex justify-center items-center flex-col lg:flex-row">
-          {/* <RoundChart
-            data={sampleData}
-            label={{ main: '출금', subNum: 30000 }}
-          /> */}
           <LineGraph data={multiSampleData} />
         </div>
         <div className="bg-white h-auto min-w-max lg:min-w-[300px] mt-5 lg:mt-0 border lg:ml-5 p-10 flex flex-col justify-start items-start">
           <div className="w-full border border-x-0 border-t-0 border-b-2 mb-8 pb-1 text-lg font-medium">
-            Today Report
+            금일 보고서
           </div>
           <div className=" text-gray-400 text-sm mb-1">총 수익</div>
           <div className="font-semibold text-xl mb-8">182000원</div>

@@ -63,7 +63,11 @@ export const RoundChart = ({
         <div className="w-full md:w-[40%] flex flex-col justify-center items-start p-4 pl-6">
           {inputData.map((row, index) => (
             <div key={index} className="w-full flex mb-2">
-              <span className="w-1/2 flex justify-start overflow-hidden text-gray-700">
+              <span className="w-1/2 flex justify-start items-center overflow-hidden text-gray-700">
+                <div
+                  style={{ backgroundColor: colorsProps[index] }}
+                  className="w-3 h-3 rounded-full mr-2"
+                ></div>
                 {row.x}
               </span>
               <span className="w-1/2 flex justify-end text-gray-600">
