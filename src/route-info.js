@@ -10,12 +10,6 @@ export const routeList = [
   {
     key: 4,
     icon: 'fa-solid fa-square-poll-vertical',
-    name: '주간 보고서',
-    herf: '/report/weekly',
-  },
-  {
-    key: 5,
-    icon: 'fa-solid fa-square-poll-vertical',
     name: '월간 보고서',
     herf: '/report/monthly',
   },

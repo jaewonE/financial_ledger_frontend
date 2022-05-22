@@ -5,7 +5,7 @@ import { SideDashBoard } from './sideDashBorad';
 import { TopBar } from './topBar';
 
 const BaseWrapper = ({ children }) => {
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState('대시보드');
   const { pathname } = useLocation();
   useEffect(() => {
     routeList.forEach((route) => {

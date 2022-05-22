@@ -8,6 +8,8 @@ export const RoundChart = ({
   label: labelText = { main: '출금', sub: '30000원', subNum: 30000 },
   half = false,
   sideLabel = true,
+  singleValue = false,
+  border = true,
 }) => {
   const [data, setData] = useState([{ x: 1, y: 0 }]);
   const [chartAngle, setChartAngle] = useState(-90);
@@ -15,8 +17,16 @@ export const RoundChart = ({
     setData(inputData);
     setChartAngle(half ? 90 : 270);
   }, [inputData, half]);
+  const colorPalette = colorsProps.slice(0, data.length);
+  if (singleValue) {
+    colorPalette[0] = '#F3F3F3';
+  }
   return (
-    <div className="w-full h-full flex flex-col md:flex-row border">
+    <div
+      className={`w-full h-full flex flex-col md:flex-row ${
+        border && 'border'
+      }`}
+    >
       <div className="relative">
         <VictoryPie
           className={`z-10 ${sideLabel ? 'w-full md:w-[60%]' : 'w-full'}`}
@@ -24,7 +34,7 @@ export const RoundChart = ({
           animate={{
             duration: 1000,
           }}
-          colorScale={colorsProps.slice(0, data.length)}
+          colorScale={colorPalette}
           containerComponent={<VictoryContainer responsive={true} />}
           labelComponent={
             <VictoryTooltip
@@ -80,43 +90,3 @@ export const RoundChart = ({
     </div>
   );
 };
-
-// return (
-//   <VictoryContainer ref={componentRef}>
-//     <VictoryPie
-//       // radius={100}
-//       // style={{ parent: { border: '1px solid black' } }}
-//       // labelComponent={
-//       //   <VictoryTooltip
-//       //     pointerLength={({ datum }) => (datum.y > 0 ? 5 : 20)}
-//       //     // flyoutStyle={{
-//       //     //   stroke: ({ datum }) => (datum.x === 10 ? 'tomato' : 'black'),
-//       //     // }}
-//       //   />
-//       // }
-//       // animate={{
-//       //   duration: 1000,
-//       // }}
-//       // height={height}
-//       // width={width}
-//       colorScale={colors.slice(0, data.length)}
-//       data={data}
-//       // innerRadius={80}
-//       // standalone={false}
-//       // containerComponent={<VictoryContainer preserveAspectRatio="none" />}
-//       // origin={{ y: 1 }}
-//       // padAngle={({ datum }) => datum.y}
-//       // width={baseWidth - 10}
-//       // height={baseWidth - 10}
-//       // padding={padding}
-//     />
-//     {/* <VictoryLabel
-//       textAnchor="middle"
-//       style={{ fontSize: labelFontSize }}
-//       origin={{ x: 100, y: 200 }}
-//       // x={(baseWidth - 10 - padding.left - padding.right) / 2 + padding.left}
-//       // y={baseWidth / 2 - 5}
-//       text={'Hello'}
-//     /> */}
-//   </VictoryContainer>
-// );

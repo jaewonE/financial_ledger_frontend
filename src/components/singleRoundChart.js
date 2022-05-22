@@ -39,7 +39,7 @@ export const SingleRoundChat = ({ data }) => {
             style={{
               data: {
                 fill: ({ datum }) => {
-                  const color = '#fff';
+                  const color = percent > 100 ? '#ff5e5e' : '#fff';
                   return datum.x === 1 ? color : 'transparent';
                 },
               },

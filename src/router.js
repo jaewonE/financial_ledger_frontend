@@ -15,7 +15,6 @@ const MainRouter = () => {
           <Route path="/dashBoard" element={<DashBoard />}></Route>
           <Route path="/spend" element={<Spend />}></Route>
           <Route path="/category" element={<Category />}></Route>
-          <Route path="/report/weekly" element={<TimeReport />}></Route>
           <Route path="/report/monthly" element={<TimeReport />}></Route>
           <Route path="/test" element={<Test />}></Route>
           <Route path="*" element={<NotFound />}></Route>

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useGlobalFilter, useSortBy, useTable } from 'react-table';
 
+const rowLimit = [
+  { value: 100, name: '100개' },
+  { value: 200, name: '200개' },
+  { value: 500, name: '500개' },
+  { value: -1, name: '제한없음' },
+];
+
 //bg-[#FAFAFC]
 export const SpendTable = ({ columns, data, searchAble }) => {
   const {
@@ -17,27 +24,50 @@ export const SpendTable = ({ columns, data, searchAble }) => {
     e.preventDefault();
     setGlobalFilter(searchTerm);
   };
+  const requestMonth = (e) => {
+    console.log(e.target.value);
+  };
+  const sortBySearchTerm = (e) => {
+    const searchWord = e.target.value;
+    setSearchTerm(searchWord);
+    setGlobalFilter(searchWord);
+  };
 
   return (
     <div className="w-full h-auto flex flex-col justify-start">
       {searchAble && (
         <form
           onSubmit={onSearch}
-          className="w-full h-16 p-1 mb-4 flex justify-start items-end"
+          className="w-full h-16 p-1 mb-4 flex justify-evenly items-center"
         >
-          <label
-            htmlFor="search-input"
-            className="min-w-fit mb-3 text-lg font-semibold mr-3"
+          <div className="w-full h-full flex items-center">
+            <label
+              htmlFor="search-input"
+              className="min-w-fit mb-3 text-lg font-semibold mr-3"
+            >
+              Search :
+            </label>
+            <input
+              id="search-input"
+              className="outline-none w-3/4 h-[90%] border border-x-0 border-t-0 border-b-2 bg-[#FDFDFE]"
+              placeholder="Enter search words..."
+              value={searchTerm}
+              onChange={sortBySearchTerm}
+            />
+          </div>
+          <select
+            className="m-0 py-0 min-w-0 w-28 lg:w-24 mx-1 sm:mr-2 md:mr-4 h-3/4 border rounded-lg shadow-inner bg-transparent hover:border-orange-400 hover:border-2 focus:outline-none"
+            name="select"
+            key={'select'}
+            defaultValue={rowLimit[0].value}
+            onChange={requestMonth}
           >
-            Search :
-          </label>
-          <input
-            id="search-input"
-            className="outline-none w-3/4 h-[90%] border border-x-0 border-t-0 border-b-2 bg-[#FDFDFE]"
-            placeholder="Enter search words..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+            {rowLimit.map((month, index) => (
+              <option key={index} value={month.value}>
+                {month.name}
+              </option>
+            ))}
+          </select>
         </form>
       )}
       <table
