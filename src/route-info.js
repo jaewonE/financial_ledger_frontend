@@ -13,4 +13,10 @@ export const routeList = [
     name: '월간 보고서',
     herf: '/report/monthly',
   },
+  {
+    key: 5,
+    icon: 'fa-solid fa-user',
+    name: '개인 정보',
+    herf: '/profile',
+  },
 ];

@@ -129,5 +129,14 @@ table {
 .bluePrint {
   @apply flex justify-center items-center font-bold text-lg bg-slate-300;
 }
+.flex-center {
+  @apply h-full w-full flex justify-center items-center flex-col;
+}
+.screen-full {
+  @apply h-screen w-screen;
+}
+.auth-input {
+  @apply w-2/3 h-10 border-[1px] border-gray-400 rounded-md pl-3 placeholder:font-medium outline-none focus:ring-1 focus:ring-green-500;
+}
 @tailwind components;
 @tailwind utilities;
