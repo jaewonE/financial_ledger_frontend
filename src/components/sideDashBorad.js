@@ -10,9 +10,9 @@ export const SideDashBoard = () => {
         to="/new"
       >
         <div className="flex items-center rounded-3xl border-2 shadow-md pl-2 md:pl-4 pr-0 md:pr-8 py-1 group hover:bg-gradient-to-r from-purple-400 to-pink-600 z-10">
-          <i className="fa-solid fa-plus font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mr-3 group-hover:text-white"></i>
+          <i className="fa-solid fa-plus ml-1 md:ml-0 font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mr-3 group-hover:text-white"></i>
           {/* <span className="font-semibold text-lg text-gray-500 hidden md:block"> */}
-          <span class="font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hidden md:block group-hover:text-white">
+          <span className="font-extrabold text-transparent text-xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 hidden md:block group-hover:text-white">
             New
           </span>
         </div>

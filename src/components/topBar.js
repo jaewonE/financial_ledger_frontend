@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 
 export const TopBar = ({ showProfile = true }) => {
   return (
-    <div className="w-full relative top-0 h-14 flex px-8 md:px-12 border border-x-0 border-t-0">
+    <div
+      style={{ position: 'fixed' }}
+      className="w-full top-0 h-14 flex pl-4 pr-4 pb-1 md:pr-12 border border-x-0 border-t-0 z-20 bg-white"
+    >
       <div className="w-full md:w-1/2 h-full flex justify-start items-center">
-        Logo
+        <span className="font-extrabold text-transparent text-xl md:text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          WalletHelper
+        </span>
       </div>
       <Link
         to="/profile"

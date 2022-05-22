@@ -19,7 +19,7 @@ const BaseWrapper = ({ children }) => {
       <TopBar />
       <div className="flex w-full h-auto text-lg">
         <SideDashBoard />
-        <div className="w-full flex flex-col h-auto">
+        <div className="w-full flex flex-col h-auto relative top-14">
           <div className="w-full h-12 pl-5 flex items-center text-gray-600 text-base font-semibold mb-2 border border-t-0">
             {location}
           </div>
