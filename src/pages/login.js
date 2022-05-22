@@ -35,8 +35,8 @@ const Login = ({ setLoginStatus }) => {
     <div className="w-screen h-screen">
       <TopBar showProfile={false} />
       <div
-        style={{ height: 'calc(100% - 56px)', backgroundColor: '#EFEFEF' }}
-        className="w-screen flex-center"
+        style={{ backgroundColor: '#EFEFEF' }}
+        className="w-screen h-screen flex-center"
       >
         <form
           style={{ backgroundColor: '#FDFDFD' }}
