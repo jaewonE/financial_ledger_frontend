@@ -9,11 +9,23 @@ const requestProfile = (data) => {
 };
 
 const categorySample = [
-  'category1',
-  'category2',
-  'category3',
-  'category4',
-  'category5',
+  { name: '식사', icon: 'fa-solid fa-utensils' },
+  { name: '카페', icon: 'fa-solid fa-mug-saucer' },
+  { name: '술/유흥', icon: 'fa-solid fa-beer-mug-empty' },
+  { name: '생활/마트', icon: 'fa-solid fa-cart-shopping' },
+  { name: '패션', icon: 'fa-solid fa-shirt' },
+  { name: '금융/보험', icon: 'fa-solid fa-landmark' },
+  { name: '의료/건강', icon: 'fa-solid fa-suitcase-medical' },
+  { name: '뷰티', icon: 'fa-solid fa-paintbrush' },
+  { name: '관리비', icon: 'fa-solid fa-house-circle-exclamation' },
+  { name: '교육', icon: 'fa-solid fa-graduation-cap' },
+  { name: '문화/예술', icon: 'fa-solid fa-clapperboard' },
+  { name: '교통', icon: 'fa-solid fa-bus-simple' },
+  { name: '스포츠', icon: 'fa-solid fa-person-running' },
+  { name: '여행', icon: 'fa-solid fa-plane' },
+  { name: '경조사', icon: 'fa-solid fa-hand-holding-dollar' },
+  { name: '출금', icon: 'fa-solid fa-dollar-sign' },
+  { name: '기타', icon: 'fa-solid fa-question' },
 ];
 
 const NewEnter = () => {
@@ -25,7 +37,7 @@ const NewEnter = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      category: categorySample[0],
+      category: categorySample[0].name,
     },
   });
   //가계, 가격, 카테고리
@@ -87,10 +99,10 @@ const NewEnter = () => {
               name="role"
               id="role"
               required
-              defaultValue={categorySample[0]}
+              defaultValue={categorySample[0].name}
             >
-              {categorySample.map((role, index) => (
-                <option key={index}>{role}</option>
+              {categorySample.map((category, index) => (
+                <option key={index}>{category.name}</option>
               ))}
             </select>
           </div>

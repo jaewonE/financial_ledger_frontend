@@ -20,7 +20,9 @@ export const LineGraph = ({
   dataInfo,
   fill = false,
   showLineLabel = true,
+  singleLine = false,
 }) => {
+  const randNum = Math.floor(Math.random() * (colorsProps.length - 0));
   return (
     <div className="w-full h-auto flex flex-col border">
       <VictoryChart
@@ -33,7 +35,7 @@ export const LineGraph = ({
             key={index}
             style={{
               data: {
-                stroke: colorsProps[index],
+                stroke: singleLine ? colorsProps[randNum] : colorsProps[index],
               },
             }}
             animate={{
@@ -50,7 +52,7 @@ export const LineGraph = ({
               key={index}
               style={{
                 data: {
-                  fill: colorsProps[index],
+                  fill: singleLine ? colorsProps[randNum] : colorsProps[index],
                   opacity: 0.1,
                   strokeWidth: 0,
                 },
@@ -90,7 +92,9 @@ export const LineGraph = ({
             <span
               key={index}
               className="text-base sm:text-lg xl:text-xl font-semibold"
-              style={{ color: `${colorsProps[index]}` }}
+              style={{
+                color: singleLine ? colorsProps[randNum] : colorsProps[index],
+              }}
             >
               — {name}
             </span>

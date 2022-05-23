@@ -102,6 +102,7 @@ const TimeReport = () => {
             fill
             showLineLabel={false}
             graphHeight={250}
+            singleLine={true}
           />
         </div>
         <div className="bg-white h-auto min-w-max lg:min-w-[300px] mt-5 lg:mt-0 border lg:ml-5 p-10 flex flex-col justify-start items-start">

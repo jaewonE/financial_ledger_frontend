@@ -102,7 +102,8 @@ export const SpendTable = ({ columns, data, searchAble }) => {
                       <div className="flex items-center">
                         {index === 1 && (
                           <div className="bg-yellow-200 rounded-2xl w-6 h-6 flex justify-center items-center mr-3  text-xs">
-                            <i className="fa-solid fa-plane-departure"></i>
+                            {/* <i className="fa-solid fa-plane-departure"></i> */}
+                            <i class="fa-solid fa-beer-mug-empty"></i>
                           </div>
                         )}
                         {cell.render('Cell')}
