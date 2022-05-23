@@ -13,6 +13,7 @@ export const FormError = ({ errorMessage }) => {
       return '비밀번호는 최소 4글자 이상입니다';
     else if (errorMessage === 'balance is required')
       return '0원 이상의 잔액을 입력해주세요';
+    else if (errorMessage === 'price is required') return '가격을 입력해주세요';
     return errorMessage;
   };
   return (

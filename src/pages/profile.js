@@ -56,11 +56,11 @@ const Profile = () => {
   };
   return (
     <BaseWrapper>
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full h-full flex justify-center items-center pt-14">
         <form
           onSubmit={handleSubmit(onSubmit)}
           style={{ backgroundColor: '#FBFBFB' }}
-          className=" w-full max-w-sm h-[30rem] flex flex-col justify-start items-center shadow-lg shadow-gray-600"
+          className=" w-full max-w-sm h-[31rem] flex flex-col justify-start items-center shadow-lg shadow-gray-600"
         >
           <div className="bg-gradient-to-r from-purple-500 via-green-600 to-yellow-500 h-2 w-full"></div>
           <div className=" text-4xl font-extralight mt-4 mb-2">
@@ -126,7 +126,7 @@ const Profile = () => {
               />
             ) : (
               <button
-                className="auth-input bg-green-100 text-black hover:bg-red-500 hover:bg-opacity-50 hover:text-white transition-colors"
+                className="auth-input bg-green-100 text-black hover:bg-red-500 hover:bg-opacity-50 hover:text-white transition-colors text-xs sm:text-base"
                 onClick={() => toggleChangePassword(true)}
               >
                 클릭해서 비밀번호를 변경하세요
@@ -191,7 +191,7 @@ const Profile = () => {
                 Object.keys(errors).length === 1
                   ? 'h-8 relative bottom-1'
                   : 'h-11'
-              } bg-red-500 text-white text-xl rounded-md mt-2 ${
+              } bg-red-500 text-white text-xl rounded-md mt-4 ${
                 !isValid && 'bg-gray-400'
               } ${(!isValid || requestLoading) && 'pointer-events-none'}`}
             >

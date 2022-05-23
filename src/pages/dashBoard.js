@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { SingleRoundChat } from '../components/singleRoundChart';
 import BaseWrapper from '../components/baseWrapper';
-import { SpendTable } from '../components/spendTable';
-import { data_tableColumn, data_tableSample } from './spend';
 import { LineGraph } from '../components/lineGraph';
 import { colorsProps } from '../props/color';
 
@@ -48,8 +46,6 @@ const singleRoundChartSampleData = [
 ];
 
 const DashBoard = () => {
-  const tableSamplecolumns = useMemo(() => data_tableColumn, []);
-  const tableSampleData = useMemo(() => data_tableSample, []);
   return (
     <BaseWrapper>
       <div className="w-full h-10 text-xl font-semibold my-1 pl-1">
@@ -83,10 +79,6 @@ const DashBoard = () => {
           </div>
         ))}
       </div>
-      <div className="w-full h-10 text-xl font-semibold my-1 pl-1">
-        최근 수입/지출 내역
-      </div>
-      <SpendTable columns={tableSamplecolumns} data={tableSampleData} />
     </BaseWrapper>
   );
 };
