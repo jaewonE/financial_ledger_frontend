@@ -26,10 +26,10 @@ export const Top3Box = ({ data, title }) => {
               {row.storeName}
             </div>
             <div className="w-1/3 h-full flex justify-center items-center">
-              {`${row.times}회`}
+              {row.times}
             </div>
             <div className="w-1/3 h-full flex justify-end items-center">
-              {`${row.money}원`}
+              {row.money}
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const TopBar = ({ showProfile = true }) => {
+export const TopBar = ({ showProfile = true, userObj }) => {
   return (
     <div
       style={{ position: 'fixed' }}
@@ -25,8 +25,12 @@ export const TopBar = ({ showProfile = true }) => {
         <div className="w-7 h-7 md:w-8 md:h-8 border-none rounded-full bg-[#91BAD6] mr-2 flex justify-center items-center">
           <i className="fa-solid fa-user text-lg text-[#C9DCEA]"></i>
         </div>
-        <div className="hidden md:block">importjaewone@gmail.com</div>
-        <div className="md:hidden block">곽재원</div>
+        <div className="hidden md:block">
+          {userObj?.email ? userObj.email : ''}
+        </div>
+        <div className="md:hidden block">
+          {userObj?.name ? userObj.name : ''}
+        </div>
       </Link>
     </div>
   );

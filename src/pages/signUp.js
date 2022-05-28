@@ -3,13 +3,16 @@ import { useForm } from 'react-hook-form';
 import { TopBar } from '../components/topBar';
 import { FormError } from '../components/formError';
 import { Link } from 'react-router-dom';
+import { sendPost } from '../mysql';
 
-const requestLogin = async (data) => {
-  return new Promise((reslove) => {
-    setTimeout(() => {
-      reslove({ pass: true, errorMessage: null, token: 'jwt_token' });
-    }, 1000);
-  });
+const requestCreateAccount = async (input) => {
+  const { status, data, err } = await sendPost(
+    'http://localhost:4000/auth/createAccount',
+    { ...input }
+  );
+  if (status === 200 && data)
+    return { pass: true, err: null, token: data.token };
+  else return { pass: false, err, token: null };
 };
 
 const SignUp = ({ setLoginStatus }) => {
@@ -22,14 +25,15 @@ const SignUp = ({ setLoginStatus }) => {
   });
   const onSubmit = async (data) => {
     console.log(data);
-    const { pass, errorMessage, token } = await requestLogin(data);
+    const { pass, err, token } = await requestCreateAccount(data);
     if (pass) {
       window.localStorage.removeItem('x-jwt');
       window.localStorage.setItem('x-jwt', token);
-      setLoginStatus(true);
+      setLoginStatus(token);
       alert(`반갑습니다 ${data.name}님!`);
     } else {
-      alert(errorMessage);
+      if (typeof err === 'string') alert(err);
+      else console.error(err);
     }
   };
   return (

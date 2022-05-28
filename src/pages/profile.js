@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import BaseWrapper from '../components/baseWrapper';
 import { FormError } from '../components/formError';
+import { sendPost } from '../mysql';
 
-const user = {
-  email: 'email@email.com',
-  age: 23,
-  password: '12345',
-  name: '곽재원',
-  balance: 140000,
-  budget: 400000,
+export const postUserObj = async (input) => {
+  const { status, err, data } = await sendPost(
+    'http://localhost:4000/profile/update',
+    {
+      ...input,
+    }
+  );
+  if (status === 200 && data) return { pass: true, err: null, data };
+  else return { pass: false, err, data: null };
 };
 
-const requestProfile = (data) => {
-  console.log('request');
-  console.log(data);
-};
-
-const Profile = () => {
+const Profile = ({ userObj, jwt, setUserObj, setLoginStatus }) => {
   const [requestLoading, setRequestLoading] = useState(false);
   const [changePassword, toggleChangePassword] = useState(false);
+  const navigate = useNavigate();
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -27,44 +27,67 @@ const Profile = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      email: user?.email ? user.email : undefined,
-      age: user?.age ? user.age : undefined,
+      email: userObj?.email ? userObj.email : undefined,
+      age: userObj?.age ? userObj.age : undefined,
       password: undefined,
-      name: user?.name ? user.name : undefined,
-      balance: user?.balance ? user.balance : undefined,
-      budget: user?.budget ? user.budget : undefined,
+      name: userObj?.name ? userObj.name : undefined,
+      balance: userObj?.balance ? userObj.balance : undefined,
+      budget: userObj?.budget ? userObj.budget : undefined,
     },
   });
-  const onSubmit = (updated) => {
+  const onSubmit = async (updated) => {
     if (!requestLoading) {
-      if (!updated.email || updated.email === user?.email) delete updated.email;
-      if (!updated.age || updated.age === user?.age) {
-        delete updated.age;
-      } else {
-        updated.age = Number(updated.age);
-      }
+      setRequestLoading(true);
+      if (!updated.name || updated.name === userObj?.name) delete updated.name;
+      if (!updated.email || updated.email === userObj?.email)
+        delete updated.email;
       if (!updated.password) delete updated.password;
-      if (!updated.name || updated.name === user?.name) delete updated.name;
-      if (!updated.name || updated.name === user?.name) delete updated.name;
-      if (!updated.name || updated.name === user?.name) delete updated.name;
+      if (!updated.age || updated.age === userObj?.age) delete updated.age;
+      else updated.age = Number(updated.age);
+      if (!updated.balance || updated.balance === userObj?.balance)
+        delete updated.balance;
+      else updated.balance = Number(updated.balance);
+      if (!updated.budget || updated.budget === userObj?.budget)
+        delete updated.budget;
+      else updated.budget = Number(updated.budget);
       if (Object.keys(updated).length) {
-        requestProfile(updated);
-      } else {
-        alert('Profile updated');
+        const { pass, err, data } = await postUserObj({ ...updated, jwt });
+        if (pass && data) {
+          setUserObj({ ...userObj, ...updated });
+          alert('수정 완료!');
+        } else console.error(err);
       }
     }
+    setRequestLoading(false);
+  };
+  const logOut = () => {
+    window.localStorage.removeItem('x-jwt');
+    setLoginStatus(null);
+    alert('다음에 또 봐요!');
+    navigate('/login');
   };
   return (
-    <BaseWrapper>
+    <BaseWrapper userObj={userObj}>
       <div className="w-full h-full flex justify-center items-center pt-14">
         <form
           onSubmit={handleSubmit(onSubmit)}
           style={{ backgroundColor: '#FBFBFB' }}
-          className=" w-full max-w-sm h-[31rem] flex flex-col justify-start items-center shadow-lg shadow-gray-600"
+          className=" w-full max-w-sm h-[35rem] flex flex-col justify-start items-center shadow-lg shadow-gray-600"
         >
           <div className="bg-gradient-to-r from-purple-500 via-green-600 to-yellow-500 h-2 w-full"></div>
           <div className=" text-4xl font-extralight mt-4 mb-2">
             Edit Profile
+          </div>
+          <div className="flex justify-center items-center w-full my-2">
+            <div className=" text-center w-20">
+              <span>로그 아웃</span>
+            </div>
+            <input
+              onClick={logOut}
+              className="auth-input bg-orange-400 hover:bg-red-500 text-white font-base font-semibold border-none"
+              type="button"
+              value="로그아웃"
+            />
           </div>
           <div className="flex justify-center items-center w-full  my-2">
             <div className=" text-center w-20">

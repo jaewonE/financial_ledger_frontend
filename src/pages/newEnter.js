@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import BaseWrapper from '../components/baseWrapper';
 import { FormError } from '../components/formError';
+import { sendPost, sendQuery } from '../mysql';
+import { postUserObj } from './profile';
 
-const requestProfile = (data) => {
-  console.log('request');
-  console.log(data);
+const postNewEnter = async (input) => {
+  const { status, err, data } = await sendPost(
+    'http://localhost:4000/insert/new',
+    {
+      ...input,
+    }
+  );
+  if (status === 200 && data) return { pass: true, err: null, data };
+  else return { pass: false, err, data: null };
 };
 
-const categorySample = [
-  { name: '식사', icon: 'fa-solid fa-utensils' },
-  { name: '카페', icon: 'fa-solid fa-mug-saucer' },
-  { name: '술/유흥', icon: 'fa-solid fa-beer-mug-empty' },
-  { name: '생활/마트', icon: 'fa-solid fa-cart-shopping' },
-  { name: '패션', icon: 'fa-solid fa-shirt' },
-  { name: '금융/보험', icon: 'fa-solid fa-landmark' },
-  { name: '의료/건강', icon: 'fa-solid fa-suitcase-medical' },
-  { name: '뷰티', icon: 'fa-solid fa-paintbrush' },
-  { name: '관리비', icon: 'fa-solid fa-house-circle-exclamation' },
-  { name: '교육', icon: 'fa-solid fa-graduation-cap' },
-  { name: '문화/예술', icon: 'fa-solid fa-clapperboard' },
-  { name: '교통', icon: 'fa-solid fa-bus-simple' },
-  { name: '스포츠', icon: 'fa-solid fa-person-running' },
-  { name: '여행', icon: 'fa-solid fa-plane' },
-  { name: '경조사', icon: 'fa-solid fa-hand-holding-dollar' },
-  { name: '출금', icon: 'fa-solid fa-dollar-sign' },
-  { name: '기타', icon: 'fa-solid fa-question' },
-];
-
-const NewEnter = () => {
+const NewEnter = ({ userObj, jwt, setUserObj }) => {
   const [requestLoading, setRequestLoading] = useState(false);
+  const [categoryList, setCategoryList] = useState([
+    { name: '식사', icon: 'fa-solid fa-utensils', id: 0 },
+  ]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const requestCategory = async () => {
+      const categorys = await sendQuery(`http://localhost:4000/category`);
+      setCategoryList(categorys.data);
+    };
+    requestCategory();
+  }, [userObj]);
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -37,18 +37,43 @@ const NewEnter = () => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      category: categorySample[0].name,
+      category: categoryList[0].name,
     },
   });
-  //가계, 가격, 카테고리
-  const onSubmit = (updated) => {
+
+  const onSubmit = async (updated) => {
     if (!requestLoading) {
-      console.log(updated);
-      requestProfile(updated);
+      setRequestLoading(true);
+      let balance = userObj.balance;
+      if (balance >= updated.price) {
+        let categoryId = 0;
+        for (let i = 0; i < categoryList.length; i++) {
+          if (categoryList[i].name === updated.category) {
+            categoryId = categoryList[i].id;
+            break;
+          }
+        }
+        const { pass, err, data } = await postNewEnter({
+          store: updated.storeName ? updated.storeName : null,
+          price: updated.price,
+          categoryId,
+          jwt,
+        });
+        if (pass && data) {
+          balance -= updated.price;
+          const results = await postUserObj({ balance, jwt });
+          if (results.pass) setUserObj({ ...userObj, balance });
+          alert('추가 완료!');
+          navigate('/spend');
+        } else console.error(err);
+      } else {
+        alert('잔액이 부족합니다');
+      }
+      setRequestLoading(false);
     }
   };
   return (
-    <BaseWrapper>
+    <BaseWrapper userObj={userObj}>
       <div className="w-full h-full flex justify-center items-center pt-14">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -95,13 +120,13 @@ const NewEnter = () => {
             </div>
             <select
               className="auth-input h-8"
-              {...register('role', { required: 'role is required.' })}
-              name="role"
-              id="role"
+              {...register('category', { required: 'category is required.' })}
+              name="category"
+              id="category"
               required
-              defaultValue={categorySample[0].name}
+              defaultValue={categoryList[0].name}
             >
-              {categorySample.map((category, index) => (
+              {categoryList.map((category, index) => (
                 <option key={index}>{category.name}</option>
               ))}
             </select>

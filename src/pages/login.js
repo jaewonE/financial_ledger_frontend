@@ -3,16 +3,22 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { FormError } from '../components/formError';
 import { TopBar } from '../components/topBar';
+import { sendPost } from '../mysql';
 
-const requestLogin = async (data) => {
-  return new Promise((reslove) => {
-    setTimeout(() => {
-      reslove({ pass: true, errorMessage: null, token: 'jwt_token' });
-    }, 1000);
-  });
+const requestLogin = async ({ email, password }) => {
+  const { status, data, err } = await sendPost(
+    'http://localhost:4000/auth/login',
+    {
+      email,
+      password,
+    }
+  );
+  if (status === 200 && data)
+    return { pass: true, err: null, token: data.token, user: data.user };
+  else return { pass: false, err, token: null, user: null };
 };
 
-const Login = ({ setLoginStatus }) => {
+const Login = ({ setLoginStatus, setUserObj }) => {
   const {
     formState: { errors, isValid },
     handleSubmit,
@@ -21,14 +27,14 @@ const Login = ({ setLoginStatus }) => {
     mode: 'onChange',
   });
   const onSubmit = async (data) => {
-    console.log(data);
-    const { pass, errorMessage, token } = await requestLogin(data);
+    const { pass, err, token, user } = await requestLogin(data);
     if (pass) {
       window.localStorage.removeItem('x-jwt');
       window.localStorage.setItem('x-jwt', token);
-      setLoginStatus(true);
+      setUserObj(user);
+      setLoginStatus(token);
     } else {
-      alert(errorMessage);
+      alert(err);
     }
   };
   return (

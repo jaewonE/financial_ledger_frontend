@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGlobalFilter, useSortBy, useTable } from 'react-table';
+import { colorsProps } from '../props/color';
 
 const rowLimit = [
   { value: 100, name: '100개' },
@@ -8,8 +9,14 @@ const rowLimit = [
   { value: -1, name: '제한없음' },
 ];
 
-//bg-[#FAFAFC]
-export const SpendTable = ({ columns, data, searchAble }) => {
+export const SpendTable = ({
+  icon = true,
+  columns,
+  column_length,
+  data,
+  searchAble,
+  setLimit,
+}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -25,7 +32,7 @@ export const SpendTable = ({ columns, data, searchAble }) => {
     setGlobalFilter(searchTerm);
   };
   const requestMonth = (e) => {
-    console.log(e.target.value);
+    setLimit(e.target.value);
   };
   const sortBySearchTerm = (e) => {
     const searchWord = e.target.value;
@@ -100,13 +107,19 @@ export const SpendTable = ({ columns, data, searchAble }) => {
                       {...cell.getCellProps()}
                     >
                       <div className="flex items-center">
-                        {index === 1 && (
-                          <div className="bg-yellow-200 rounded-2xl w-6 h-6 flex justify-center items-center mr-3  text-xs">
-                            {/* <i className="fa-solid fa-plane-departure"></i> */}
-                            <i class="fa-solid fa-beer-mug-empty"></i>
+                        {icon && index === 0 && (
+                          <div
+                            style={{
+                              backgroundColor:
+                                colorsProps[row.original.categoryId],
+                            }}
+                            className="rounded-2xl w-6 h-6 flex justify-center items-center mr-3 text-xs text-white"
+                          >
+                            <i className={row.original.icon}></i>
                           </div>
                         )}
                         {cell.render('Cell')}
+                        {index === column_length - 1 && <span>원</span>}
                       </div>
                     </td>
                   );

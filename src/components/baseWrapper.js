@@ -4,7 +4,7 @@ import { routeList } from '../route-info';
 import { SideDashBoard } from './sideDashBorad';
 import { TopBar } from './topBar';
 
-const BaseWrapper = ({ children }) => {
+const BaseWrapper = ({ children, userObj }) => {
   const [location, setLocation] = useState('대시보드');
   const { pathname } = useLocation();
   useEffect(() => {
@@ -16,7 +16,7 @@ const BaseWrapper = ({ children }) => {
   }, [pathname]);
   return (
     <>
-      <TopBar />
+      <TopBar userObj={userObj} />
       <div className="flex w-full h-auto text-lg">
         <SideDashBoard />
         <div className="w-full flex flex-col relative top-14">

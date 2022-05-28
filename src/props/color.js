@@ -2,7 +2,7 @@ export const colorsProps = [
   '#F56D00',
   '#9F3AB7',
   '#64CCE9',
-  '#32120A',
+  '#BFAFBF',
   '#F8984C',
   '#BB75CC',
   '#92DBEF',
@@ -11,4 +11,9 @@ export const colorsProps = [
   '#D4A6DE',
   '#B9E8F5',
   '#A39491',
+  '#BBFBEF',
+  '#BAAB45',
+  '#FBCE24',
+  '#CD12DF',
+  '#B0DE24',
 ];
