@@ -143,7 +143,7 @@ const TimeReport = ({ userObj, jwt }) => {
             <span>의 월간 보고서</span>
           </div>
           <div className="w-full h-10 text-xl font-semibold my-1 mt-3 pl-1">
-            {dayState}의 일별 누적 지출
+            {dayState}의 일별 지출
           </div>
           <div className="w-full auto flex flex-col lg:flex-row mb-8">
             <div className="bg-white w-full h-auto flex justify-center items-center flex-col lg:flex-row">

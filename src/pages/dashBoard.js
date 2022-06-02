@@ -148,7 +148,7 @@ const DashBoard = ({ userObj, jwt }) => {
   }, [jwt, userObj.budget]);
   return (
     <BaseWrapper userObj={userObj}>
-      {totalReport && lineGraphData && lineInfo && roundChartData && (
+      {totalReport && lineGraphData && lineInfo && roundChartData ? (
         <>
           <div className="w-full h-10 text-xl font-semibold my-1 pl-1">
             최근 주간 지출
@@ -187,6 +187,10 @@ const DashBoard = ({ userObj, jwt }) => {
             ))}
           </div>
         </>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center text-2xl font-bold">
+          No Data
+        </div>
       )}
     </BaseWrapper>
   );
